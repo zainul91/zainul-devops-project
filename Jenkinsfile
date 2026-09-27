@@ -5,7 +5,13 @@ pipeline {
 
         stage('Maven Build') {
             steps {
-                bat 'mvn clean package'
+                bat '''
+                    echo JAVA_HOME=%JAVA_HOME%
+                    where java
+                    java -version
+                    where mvn
+                    mvn -version
+                '''
             }
         }
 
