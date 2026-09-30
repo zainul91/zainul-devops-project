@@ -25,5 +25,11 @@ pipeline {
             }
         }
 
+        stage('Docker Run') {
+            steps {
+                bat 'docker run --name zainul-devops-container zainul-devops-app'
+            }
+        }
+
     }
 }
