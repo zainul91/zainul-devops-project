@@ -36,7 +36,25 @@ pipeline {
             steps {   
                 bat 'docker build -t zainul-devops-app .'   
             }   
-        }   
+        }
+
+        stage('Docker Push') {
+            steps {
+                withCredentials([
+                    usernamePassword(
+                        credentialsId: 'dockerhub-credentials',
+                        usernameVariable: 'DOCKER_USERNAME',
+                        passwordVariable: 'DOCKER_PASSWORD'
+                    )
+                ]) {
+                    bat '''
+                        docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%
+                        docker tag zainul-devops-app %DOCKER_USERNAME%/zainul-devops-app:latest
+                        docker push %DOCKER_USERNAME%/zainul-devops-app:latest
+                    '''
+                }
+            }
+        }
    
         stage('Docker Run') {   
             steps {   
