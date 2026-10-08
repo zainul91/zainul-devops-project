@@ -1,3 +1,4 @@
+```groovy
 pipeline {     
     agent {     
         label 'Slave2'     
@@ -19,8 +20,8 @@ pipeline {
                     '''     
                 }     
             }     
-        }     
-  
+        }  
+ 
         stage('Test') {  
             steps {  
                 withEnv([  
@@ -37,7 +38,7 @@ pipeline {
                 bat 'docker build -t zainul-devops-app .'     
             }     
         }  
-  
+ 
         stage('Docker Push') {  
             steps {  
                 withCredentials([  
@@ -60,7 +61,13 @@ pipeline {
             steps {     
                 bat 'docker run --rm --name zainul-devops-container zainul-devops-app'     
             }     
-        }   
+        }
+
+        stage('Docker Cleanup') {
+            steps {
+                bat 'docker image prune -f'
+            }
+        }
    
         stage('Deploy') {   
             steps {   
@@ -72,3 +79,4 @@ pipeline {
  
     // GitHub Webhook Test 
 }
+```
