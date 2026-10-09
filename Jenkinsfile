@@ -1,4 +1,3 @@
-```groovy
 pipeline {
     agent {
         label 'Slave2'
@@ -78,4 +77,4 @@ pipeline {
 
     // GitHub Webhook Test
 }
-```
+
