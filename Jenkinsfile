@@ -77,6 +77,20 @@ pipeline {
         }
     }
 
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+
+        failure {
+            echo 'Pipeline failed. Please check the console logs.'
+        }
+
+        always {
+            echo 'Pipeline execution finished.'
+        }
+    }
+
     // GitHub Webhook Test
 }
 
